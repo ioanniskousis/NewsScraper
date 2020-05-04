@@ -151,9 +151,9 @@ In order to expand the program so it can scrap news from other website, a config
 
   Test units are in spec/scraper_spec.rb file.  
   Tests are applied so they depend on the content of the web sites which may vary.  
-  Please note that news websites change their content on a fast pace and in a case that some tests fail due to this reason, you main apply the following changes in the spec/scraper_spec.rb file.
-    * Change lines 66, 67 and 68 so constant strings refer to existing content in the actual articles headings
-    * Change lines 94, 95 and 96 so constant strings refer to existing content in the actual articles description
+  Please note that news websites change their content on a fast pace and in a case that some tests fail due to this reason, you main apply the following changes in the spec/scraper_spec.rb file.  
+    * Change lines 66, 67 and 68 so constant strings refer to existing content in the actual articles headings  
+    * Change lines 94, 95 and 96 so constant strings refer to existing content in the actual articles description  
 
 ### Built With
 

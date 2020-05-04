@@ -175,13 +175,13 @@ This project was built using these technologies.
 
 ## Contributors
 
-    :bust_in_silhouette: **Author**
-    ​## Ioannis Kousis
+:bust_in_silhouette: **Author**
+​## Ioannis Kousis
 
-    - Github: [@ioanniskousis](https://github.com/ioanniskousis)
-    - Twitter: [@ioanniskousis](https://twitter.com/ioanniskousis)
-    - Linkedin: [Ioannis Kousis](https://www.linkedin.com/in/ioannis-kousis-9a5051b4/)
-    - E-mail: jgkousis@gmail.com
+- Github: [@ioanniskousis](https://github.com/ioanniskousis)
+- Twitter: [@ioanniskousis](https://twitter.com/ioanniskousis)
+- Linkedin: [Ioannis Kousis](https://www.linkedin.com/in/ioannis-kousis-9a5051b4/)
+- E-mail: jgkousis@gmail.com
 
 <!-- ACKNOWLEDGEMENTS -->
 

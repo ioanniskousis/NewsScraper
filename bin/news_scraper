@@ -122,7 +122,7 @@ end
 
 def show_search_results
   puts
-  fputs 'Search Results For : [' + @search_text +']'
+  fputs 'Search Results For : [' + @search_text + ']'
   fputs double_horz_line(PADDING)
   if @current_source.nil?
     @sources.each do |source|
@@ -227,7 +227,7 @@ def handle_search(input)
   @search_text = input
   @search_status = SEARCH_STATUS_RESULTS
   if @current_source.nil?
-    @sources.each { |source| source.search(input)}
+    @sources.each { |source| source.search(input) }
   else
     @current_source.search(input)
   end

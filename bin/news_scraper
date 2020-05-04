@@ -57,7 +57,7 @@ def show_sources
   end
   puts
   fputs horz_line(PADDING)
-  show_text_lines 'Select Source Number to vew articles tree'
+  show_text_lines 'Select Source Number to view articles tree'
 end
 
 def show_sections

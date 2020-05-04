@@ -69,44 +69,44 @@ The project consists of the following files
 
 - The 'bin' folder
 
-* news_scraper
-  The news_scraper is the executable file that controls the program logic and the interface.  
-  Uses a loop tracking the status of the program and shows available options depending on each status.  
+  * news_scraper  
+    The news_scraper is the executable file that controls the program logic and the interface.  
+    Uses a loop tracking the status of the program and shows available options depending on each status.  
 
 - The 'lib' folder
 
-* source.rb
-  This class controls gathering content from a particular website.
+  * source.rb  
+    This class controls gathering content from a particular website.
 
-* section.rb
-  This class controls gathering content from a particular section.
+  * section.rb  
+    This class controls gathering content from a particular section.
 
-* article.rb
-  This class controls gathering content from a particular article.
+  * article.rb  
+    This class controls gathering content from a particular article.
 
-* utils.rb
-  This file contains helper methods for parsing text and interface format.
+  * utils.rb  
+    This file contains helper methods for parsing text and interface format.
 
-* string.rb
-  This module provides extension to the String Class.
+  * string.rb  
+    This module provides extension to the String Class.
 
 - The 'resources' folder
 
-* newsweek.rb
-  This is a configuration file for the Newsweek website
+  * newsweek.rb  
+    This is a configuration file for the Newsweek website
 
-* nytime.rb
-  This is a configuration file for the New York Times website
+  * nytime.rb  
+    This is a configuration file for the New York Times website
 
 <!-- ABOUT THE PROJECT -->
 ## Application Instructions  
 
-The program starts listing the available sources.  
-By selecting a source typing it's relevant number the configured sections list appear.  
-By selecting a section typing it's relevant number a list of  articles of the selected section appears showing their headers.  
-By selecting an article typing it's relevant number the header and description of the selected article appears.  
-Consecutive pressing the return key returns to the initial screen with the list of sources.  
-Entering 's' lets to provide a text to be searched in either all sources or the particular selected source.
+  The program starts listing the available sources.  
+  By selecting a source typing it's relevant number the configured sections list appear.  
+  By selecting a section typing it's relevant number a list of  articles of the selected section appears showing their headers.  
+  By selecting an article typing it's relevant number the header and description of the selected article appears.  
+  Consecutive pressing the return key returns to the initial screen with the list of sources.  
+  Entering 's' lets to provide a text to be searched in either all sources or the particular selected source.
 
 ## Configuration and Expansion  
 
@@ -139,57 +139,57 @@ In order to expand the program so it can scrap news from other website, a config
       ```
 
 ## Development
-* Clone the project
-```
-https://github.com/ioanniskousis/NewsScraper.git
-```
-* Run the Application
+  * Clone the project
+  ```
+  https://github.com/ioanniskousis/NewsScraper.git
+  ```
+  * Run the Application
 
-In order to run the application, just type: `news_scraper` and press enter!  
+  In order to run the application, just type: `news_scraper` and press enter!  
 
 ## Testing
 
-Test units are in spec/scraper_spec.rb file.  
-Tests are applied so they depend on the content of the web sites which may vary.  
-Please note that news websites change their content on a fast pace and in a case that some tests fails due to this reason, you main apply the following changes in the spec/scraper_spec.rb file.
-  * Change lines 66, 67 and 68 so constant strings refer to existing content in the actual articles headings
-  * Change lines 94, 95 and 96 so constant strings refer to existing content in the actual articles description
+  Test units are in spec/scraper_spec.rb file.  
+  Tests are applied so they depend on the content of the web sites which may vary.  
+  Please note that news websites change their content on a fast pace and in a case that some tests fail due to this reason, you main apply the following changes in the spec/scraper_spec.rb file.
+    * Change lines 66, 67 and 68 so constant strings refer to existing content in the actual articles headings
+    * Change lines 94, 95 and 96 so constant strings refer to existing content in the actual articles description
 
 ### Built With
 
 This project was built using these technologies.
 
-- Ruby
-- Rubocop
-- VsCode
-- Git-Flow
-- nokogiri gem
+  - Ruby
+  - Rubocop
+  - VsCode
+  - Git-Flow
+  - nokogiri gem
 
 <!-- LIVE VERSION -->
 
 ## Live version
 
-You can see it working [![Run on Repl.it](https://repl.it/badge/github/ioanniskousis/NewsScraper)](https://repl.it/@ioanniskousis/NewsScraper)
+  You can see it working [![Run on Repl.it](https://repl.it/badge/github/ioanniskousis/NewsScraper)](https://repl.it/@ioanniskousis/NewsScraper)
 
 <!-- CONTACT -->
 
 ## Contributors
 
-:bust_in_silhouette: **Author**
-​## Ioannis Kousis
+    :bust_in_silhouette: **Author**
+    ​## Ioannis Kousis
 
-- Github: [@ioanniskousis](https://github.com/ioanniskousis)
-- Twitter: [@ioanniskousis](https://twitter.com/ioanniskousis)
-- Linkedin: [Ioannis Kousis](https://www.linkedin.com/in/ioannis-kousis-9a5051b4/)
-- E-mail: jgkousis@gmail.com
+    - Github: [@ioanniskousis](https://github.com/ioanniskousis)
+    - Twitter: [@ioanniskousis](https://twitter.com/ioanniskousis)
+    - Linkedin: [Ioannis Kousis](https://www.linkedin.com/in/ioannis-kousis-9a5051b4/)
+    - E-mail: jgkousis@gmail.com
 
 <!-- ACKNOWLEDGEMENTS -->
 
 ## Acknowledgements
 
-- [Microverse](https://www.microverse.org/)
-- [The Odin Project](https://www.theodinproject.com/)
-- [Ruby Documentation](https://www.ruby-lang.org/en/documentation/)
+  - [Microverse](https://www.microverse.org/)
+  - [The Odin Project](https://www.theodinproject.com/)
+  - [Ruby Documentation](https://www.ruby-lang.org/en/documentation/)
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->

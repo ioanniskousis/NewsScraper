@@ -1,1 +1,285 @@
 #!/usr/bin/env ruby
+require 'nokogiri'
+require 'open-uri'
+require_relative '../lib/utils'
+require_relative '../lib/source'
+require_relative '../lib/section'
+require_relative '../lib/article'
+
+PADDING = 4
+PROGRAM_STATUS_SOURCES = 1
+PROGRAM_STATUS_SECTIONS = 2
+PROGRAM_STATUS_ARTICLES = 3
+PROGRAM_STATUS_ARTICLE = 4
+@program_status = PROGRAM_STATUS_SOURCES
+
+SEARCH_STATUS_NONE = 0
+SEARCH_STATUS_SEARCH = 1
+SEARCH_STATUS_RESULTS = 2
+@search_status = SEARCH_STATUS_NONE
+@search_text = ''
+
+# source_modules = [{file: 'newsweek', module: Object.const_get('NewsWeek')},
+#                   {file: 'nytimes', module: Object.const_get('NewYorkTimes')}]
+# source_modules.each do |configuration|
+#   require_relative configuration[:file]
+#   hash = {}
+#   hash.extend(configuration[:module])
+#   hash.setup
+# end
+
+require_relative '../resources/newsweek'
+require_relative '../resources/nytimes'
+
+newsweek_hash = {}
+newsweek_hash.extend(NewsWeek)
+newsweek_hash.setup
+
+nytime_hash = {}
+nytime_hash.extend(NewYorkTimes)
+nytime_hash.setup
+
+@sources = []
+@sources << Source.new(newsweek_hash)
+@sources << Source.new(nytime_hash)
+
+@current_source = nil
+@current_section = nil
+@current_article = nil
+
+def fprint(str)
+  print String.new(' ' * PADDING) + str
+end
+
+def fputs(str)
+  puts String.new(' ' * PADDING) + str
+end
+
+def show_sources
+  @current_source = nil
+  puts
+  sources_count = 0
+  @sources.each do |source|
+    sources_count += 1
+    fputs "#{sources_count}. #{source.caption}"
+    source.errors.each { |error| fputs '* ' + error }
+  end
+  puts
+  fputs horz_line(PADDING)
+  show_text_lines 'Select Source Number to vew articles tree'
+end
+
+def show_sections
+  puts
+  fputs @current_source.caption
+  fputs top_line('SECTIONS', PADDING)
+  puts
+  @current_source.sections.each_with_index do |section, i|
+    fputs((' ' + (i + 1).to_s)[-2..-1] + '. ' + section.title.upcase)
+  end
+  puts
+  fputs horz_line(PADDING)
+  show_text_lines('Select Section Number' + ' | ' + 'Press Enter Key to return to Sources')
+end
+
+def show_articles
+  puts
+  fputs @current_source.caption
+  fputs top_line(@current_section.title.upcase, PADDING)
+  puts
+  @current_section.articles.each_with_index { |article, i| show_article_header_lines(article.header, i) }
+  puts
+  fputs horz_line(PADDING)
+  show_text_lines('Select Article Number' + ' | ' + 'Press Enter Key to return to Sections')
+end
+
+def show_article
+  puts
+  fputs @current_source.caption
+  fputs top_line(@current_section.title.upcase, PADDING)
+  puts
+  show_article_info(@current_article)
+  puts
+  fputs horz_line(PADDING)
+  show_text_lines('Press Enter Key to return to Articles')
+end
+
+def show_article_info(article)
+  fputs 'ARTICLE INFO'
+  show_text_lines('- ' + article.header)
+  fputs horz_line(PADDING)
+  show_text_lines(article.description)
+end
+
+def show_search_request
+  puts
+  if @current_source.nil?
+    @sources.each { |source| fputs source.caption }
+  else
+    fputs @current_source.caption
+  end
+end
+
+def show_search_results
+  puts
+  fputs 'Search Results For : [' + @search_text +']'
+  fputs double_horz_line(PADDING)
+  if @current_source.nil?
+    @sources.each do |source|
+      show_source_search_results(source)
+    end
+  else
+    show_source_search_results(@current_source)
+  end
+end
+
+def show_source_search_results(source)
+  cnt = source.search_results.count
+  puts
+  fputs source.caption + ' *** ' + cnt.to_s + ' Result' + (cnt == 1 ? '' : 's')
+  fputs horz_line(PADDING)
+  fputs top_line('** No Results Found **', PADDING) if cnt.zero?
+  puts
+  search_section_title = ''
+  source.search_results.each do |result|
+    section = result[:section]
+    article = result[:article]
+    if search_section_title != section.title
+      fputs top_line(section.title.upcase, PADDING)
+      puts
+      search_section_title = section.title
+    end
+    show_article_info(article)
+    puts
+  end
+  fputs double_horz_line(PADDING)
+end
+
+def show_article_header_lines(article_header, article_index)
+  header = (' ' + (article_index + 1).to_s)[-2..-1] + '. ' + article_header
+  lines = header_lines(header, PADDING)
+  lines.each { |line| fputs line }
+end
+
+def show_text_lines(text)
+  lines = text_lines(text, PADDING)
+  lines.each { |line| fputs line }
+end
+
+def handle_program_input(input)
+  handle_return if input.size.zero?
+  handle_navigation(input)
+  @search_status = SEARCH_STATUS_SEARCH if input.downcase == 's'
+  return false if input.downcase == 'x'
+
+  true
+end
+
+def handle_navigation(input)
+  handle_article_input(input.to_i) if @program_status == PROGRAM_STATUS_ARTICLE
+  handle_articles_input(input.to_i) if @program_status == PROGRAM_STATUS_ARTICLES
+  handle_sections_input(input.to_i) if @program_status == PROGRAM_STATUS_SECTIONS
+  handle_source_input(input.to_i) if @program_status == PROGRAM_STATUS_SOURCES
+end
+
+def handle_source_input(inp)
+  return if (1..@sources.count).none?(inp)
+
+  return unless @sources[inp - 1].open
+
+  @current_source = @sources[inp - 1]
+  @program_status = PROGRAM_STATUS_SECTIONS
+end
+
+def handle_sections_input(inp)
+  return if (1..@current_source.sections.count).none?(inp)
+
+  @current_section = @current_source.sections[inp - 1]
+  @program_status = PROGRAM_STATUS_ARTICLES
+end
+
+def handle_articles_input(inp)
+  return if (1..@current_section.articles.count).none?(inp)
+
+  @current_article = @current_section.articles[inp - 1]
+  @program_status = PROGRAM_STATUS_ARTICLE
+end
+
+def handle_article_input(inp)
+  return if (1..@current_section.articles.count).none?(inp)
+
+  @current_article = @current_section.articles[inp - 1]
+  @program_status = PROGRAM_STATUS_ARTICLE
+end
+
+def handle_search_request(input)
+  handle_search_return if input.size.zero?
+  handle_search(input) if input.size.positive?
+end
+
+def handle_search_return
+  @search_status = SEARCH_STATUS_NONE if @search_status == SEARCH_STATUS_SEARCH
+
+  @search_status = SEARCH_STATUS_SEARCH if @search_status == SEARCH_STATUS_RESULTS
+end
+
+def handle_search(input)
+  @search_text = input
+  @search_status = SEARCH_STATUS_RESULTS
+  if @current_source.nil?
+    @sources.each { |source| source.search(input)}
+  else
+    @current_source.search(input)
+  end
+end
+
+def clear_screen
+  system('clear') || system('cls')
+end
+
+def user_input
+  show_text_lines('Enter "s" to search content | Enter "x" to end the program')
+  fputs horz_line(PADDING)
+  fprint ''
+  gets.chomp
+end
+
+def search_request
+  fputs horz_line(PADDING)
+  src = @current_source.nil? ? 'All Sources' : @current_source.caption
+  show_text_lines("Enter text to be searched in #{src}")
+  fputs horz_line(PADDING)
+  fprint ''
+  gets.chomp
+end
+
+def handle_return
+  @program_status = PROGRAM_STATUS_SOURCES if @program_status == PROGRAM_STATUS_SECTIONS
+
+  @program_status = PROGRAM_STATUS_SECTIONS if @program_status == PROGRAM_STATUS_ARTICLES
+
+  @program_status = PROGRAM_STATUS_ARTICLES if @program_status == PROGRAM_STATUS_ARTICLE
+end
+
+loop do
+  clear_screen
+  if @search_status == SEARCH_STATUS_NONE
+    show_sources if @program_status == PROGRAM_STATUS_SOURCES
+
+    show_sections if @program_status == PROGRAM_STATUS_SECTIONS
+
+    show_articles if @program_status == PROGRAM_STATUS_ARTICLES
+
+    show_article if @program_status == PROGRAM_STATUS_ARTICLE
+
+    break unless handle_program_input(user_input)
+  else
+    show_search_request if @search_status == SEARCH_STATUS_SEARCH
+    show_search_results if @search_status == SEARCH_STATUS_RESULTS
+
+    handle_search_request(search_request)
+  end
+end
+
+system('clear') || system('cls')
+fputs 'SCRAPER PROGRAM ENDED'

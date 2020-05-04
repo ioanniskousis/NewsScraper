@@ -19,15 +19,6 @@ SEARCH_STATUS_RESULTS = 2
 @search_status = SEARCH_STATUS_NONE
 @search_text = ''
 
-# source_modules = [{file: 'newsweek', module: Object.const_get('NewsWeek')},
-#                   {file: 'nytimes', module: Object.const_get('NewYorkTimes')}]
-# source_modules.each do |configuration|
-#   require_relative configuration[:file]
-#   hash = {}
-#   hash.extend(configuration[:module])
-#   hash.setup
-# end
-
 require_relative '../resources/newsweek'
 require_relative '../resources/nytimes'
 

@@ -111,16 +111,16 @@ Entering 's' lets to provide a text to be searched in either all sources or the 
 Configuration modules are Hash instances extensions.  
 To extend a hash with a particular module the extend method is selected by a hash instance providing the class name in the module. Then the setup method of the module is selected by the hash.  
 The setup method of the extension fills the hash with three key-value pairs. 
-  * The :caption key with vslue an arbitrary entry that identifies the source
+  * The :caption key with value an arbitrary entry that identifies the source
   * The :url key with value the URL of the targeted website
-  * The :section_hashes key which is an array of hashes each with following entries
+  * The :section_hashes key and value an array of hashes each with following entries
     * :section_id or :section_class to target a section in the mark-up using either the id of the element or it's css class
-    * :title_tag or :title_class to target the element containing the title of the section, using either the id of the element or it's css class. If no :section_id nor :section_class are given, then a :title key is required with an arbitrary value. In this case the scraping for articles is performed into the total murk-up of the site.
-    * :article_tag or :article_class to target the elements in the section of the section containing article content, using either the element's tag or it's css class
+    * :title_tag or :title_class to target the element containing the title of the section, using either the id of the element or it's css class. If no :section_id nor :section_class are given, then a :title key is required with an arbitrary value. In this case the scraping for articles is performed into the total mark-up of the site.
+    * :article_tag or :article_class to target the elements of the section containing article content, using either the element's tag or it's css class
     * :article_header_tag or :article_header_class to target the header of the article, using either the element's tag or it's css class
     * :article_desc_tag or :article_desc_class to target the description of the article, using either the element's tag or it's css class
 
-In order to expand the program so it can scrap news from other website, a conficuration module has to be created according to the two provided templated and do following changes in the news_scraper file
+In order to expand the program so it can scrap news from other website, a configuration module has to be created according to the two provided templates and do the following changes in the news_scraper file
   * Add an entry after the 'require_relative' entries pointing the configuration file  
       ```
       require_relative '<new_configuration_file>'
@@ -131,7 +131,7 @@ In order to expand the program so it can scrap news from other website, a confic
       <new_hash>.extend(<new_class>)
       <new_hash>.setup
       ```
-  * Add the new hash to the sources array
+  * Create an instance of Source Class providing the new_hash and add the instance to the sources array
       ```
       @sources << Source.new(<new_hash>)
       ```

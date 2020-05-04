@@ -54,6 +54,8 @@ In order to expand scraping, one can create a new configuration module and add i
 - [About the Project](#about-the-project)
 - [Application Instructions](#application-instructions)
 - [Configuration and Expansion](#configuration-and-expansion)
+- [Development](#development)
+- [Testing](#testing)
 - [Built With](#built-with)
 - [Live Version](#live-version)
 - [Acknowledgements](#acknowledgements)
@@ -147,7 +149,11 @@ In order to run the application, just type: `news_scraper` and press enter!
 
 ## Testing
 
-In order to run the application, just type: 'news_scraper' and press enter!
+Test units are in spec/scraper_spec.rb file.  
+Tests are applied so they depend on the content of the web sites which may vary.  
+Please note that news websites change their content on a fast pace and in a case that some tests fails due to this reason, you main apply the following changes in the spec/scraper_spec.rb file.
+  * Change lines 66, 67 and 68 so constant strings refer to existing content in the actual articles headings
+  * Change lines 94, 95 and 96 so constant strings refer to existing content in the actual articles description
 
 ### Built With
 

@@ -25,9 +25,9 @@ newsweek.open
 
 RSpec.describe Source do
   describe '#open' do
-    google = Source.new({ caption: 'Google', url: 'https://www.google.com', section_hashes: [] })
+    google = Source.new({ caption: 'GitHub', url: 'https://www.github.com', section_hashes: [] })
     google.open
-    it 'Opens Google whithout errors' do
+    it 'Opens GitHub whithout errors' do
       expect(google.errors.count.zero?).to be true
     end
 

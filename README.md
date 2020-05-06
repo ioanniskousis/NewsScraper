@@ -145,7 +145,7 @@ In order to expand the program so it can scrap news from other website, a config
   ```
   * Run the Application
 
-  In order to run the application, just type: `news_scraper` and press enter!  
+  In order to run the application from a terminal, move to folder bin, type: `news_scraper` and press enter!  
 
 ## Testing
 

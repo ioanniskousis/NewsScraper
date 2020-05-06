@@ -117,3 +117,12 @@ RSpec.describe Article do
     end
   end
 end
+
+RSpec.describe 'utils' do
+  describe '#header' do
+    ancor = '<a href="#href">Section Title</a>'
+    it 'extracts title from an ancor element mark-up' do
+      expect(extract_title(ancor)).to eq('Section Title')
+    end
+  end
+end

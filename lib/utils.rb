@@ -12,16 +12,6 @@ def extract_title(*args)
   block_title
 end
 
-def extract_href(ancor)
-  href_start = ancor.index('href')
-  ancor = ancor[href_start + 1..-1]
-  href_quot = ancor.index('\"')
-  ancor = ancor[href_quot + 1..-1]
-  href_end = ancor.index('\"')
-  ancor = ancor[0..href_end - 1]
-  ancor
-end
-
 def screen_width
   screen_size = IO.console.winsize
   screen_size[1]

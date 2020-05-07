@@ -176,6 +176,7 @@ end
 def handle_source_input(inp)
   return if (1..@sources.count).none?(inp)
 
+  fprint 'Opening ' + @sources[inp - 1].caption + '...'
   return unless @sources[inp - 1].open
 
   @current_source = @sources[inp - 1]
@@ -237,11 +238,15 @@ end
 
 def search_request
   fputs horz_line(PADDING)
+  show_text_lines('Press Enter Key to return to Sources' + (@search_status == SEARCH_STATUS_RESULTS ? ' (twice)' : ''))
   src = @current_source.nil? ? 'All Sources' : @current_source.caption
   show_text_lines("Enter text to be searched in #{src}")
   fputs horz_line(PADDING)
   fprint ''
-  gets.chomp
+  search = gets.chomp
+  fputs 'Serching for [' + search + ']...' if search.size.positive?
+  fprint ''
+  search
 end
 
 def handle_return

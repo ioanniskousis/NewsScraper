@@ -47,6 +47,10 @@ By targeting particular mark-up elements, searches for titles and descriptions o
 At this current version, two news paper sites are configured, the Newsweek and The New York Times websites.  
 In order to expand scraping, one can create a new configuration module and add it to the source modules list.
 
+<br />
+<img src="images/news_scraper.png" alt="program interface">
+<br />
+
 <!-- TABLE OF CONTENTS -->
 
 ## Table of Contents

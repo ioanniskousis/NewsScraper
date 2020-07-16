@@ -43,7 +43,7 @@
 </p>
 
 NewsScraper is an application that gathers content from news websites, shows the results organized in sections of interest and performs searching.  
-By targeting particular mark-up elements, searches for titles and descriptions of news. For each website to search it’s content a configuration file is required which is added to the source modules list. The configuration file uses detailed format described in the configuration section of this document.
+By targeting particular mark-up elements, searches for titles and descriptions of news. To search the content of each website, a configuration file is required, which is added to the source modules list. The configuration file uses detailed format described in the configuration section of this document.
 At this current version, two news paper sites are configured, the Newsweek and The New York Times websites.  
 In order to expand scraping, one can create a new configuration module and add it to the source modules list.
 
@@ -106,11 +106,11 @@ The project consists of the following files
 ## Application Instructions  
 
   The program starts listing the available sources.  
-  By selecting a source typing it's relevant number the configured sections list appear.  
-  By selecting a section typing it's relevant number a list of  articles of the selected section appears showing their headers.  
-  By selecting an article typing it's relevant number the header and description of the selected article appears.  
-  Consecutive pressing the return key returns to the initial screen with the list of sources.  
-  Entering 's' lets to provide a text to be searched in either all sources or the particular selected source.
+  When selecting a source, type its relevant number and the configured sections list will appear
+  When selecting a section, type its relevant number and the list of  articles of the selected section will appear showing their headers  
+  When selecting an article type its relevant number and the header and description of the selected article will appear  
+  Consecutive pressing the return key, returns to the initial screen with the list of sources  
+  Entering 's' lets to provide a text to be searched in either all sources or the particular selected source
 
 ## Configuration and Expansion  
 
@@ -179,8 +179,7 @@ This project was built using these technologies.
 
 ## Contributors
 
-:bust_in_silhouette: **Author**
-## Ioannis Kousis
+:bust_in_silhouette: ## Ioannis Kousis
 
 - Github: [@ioanniskousis](https://github.com/ioanniskousis)
 - Twitter: [@ioanniskousis](https://twitter.com/ioanniskousis)

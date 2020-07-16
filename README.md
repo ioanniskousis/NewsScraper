@@ -179,7 +179,7 @@ This project was built using these technologies.
 
 ## Contributors
 
-:bust_in_silhouette: ## Ioannis Kousis
+:bust_in_silhouette: ** Ioannis Kousis
 
 - Github: [@ioanniskousis](https://github.com/ioanniskousis)
 - Twitter: [@ioanniskousis](https://twitter.com/ioanniskousis)
